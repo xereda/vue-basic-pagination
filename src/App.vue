@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <paginacao
+      :total-elements="TOTAL_ELEMENTS"
+      :items-per-page="ITEMS_PER_PAGE"
+      :current-page="currentPage"
+      @change-page="changePage"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Paginacao from './components/Pagination';
+
+const TOTAL_ELEMENTS = 103; // vem junto com a lista de itens
+const ITEMS_PER_PAGE = 20; // geralmente uma configuracao pre determinada
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
-  }
+    Paginacao,
+  },
+  data() {
+    return {
+      TOTAL_ELEMENTS,
+      ITEMS_PER_PAGE,
+      currentPage: 1,
+    }
+  },
+  methods: {
+    changePage(page) {
+      console.log(page);
+      this.currentPage = page;
+    }
+  },
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
